@@ -1,0 +1,48 @@
+
+#infinite-list > div {
+  /* for items */
+	margin-bottom: 30px;
+}
+
+/* Optional eye candy below: */
+li {
+  padding: 10px;
+  list-style-type: none;
+}
+li:hover {
+  background: #ccc;
+}
+
+/* new */
+body {
+	background-color: #eeeeee;
+}
+
+.h7 {
+	font-size: 0.8rem;
+}
+
+.gedf-wrapper {
+	margin-top: 0.97rem;
+}
+
+@media (min-width: 992px) {
+	.gedf-main {
+			padding-left: 4rem;
+			padding-right: 4rem;
+	}
+	.gedf-card {
+			margin-bottom: 2.77rem;
+	}
+}
+
+.sticky {
+	/* position: fixed; */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: yellow;
+  padding: 50px;
+  font-size: 20px;
+	/* z-index: 101; */
+}

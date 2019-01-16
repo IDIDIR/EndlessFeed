@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Smooth Scrolling using jQuery</title>
+	
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="jquery-1.9.1.js"></script> -->
+
+	<script type="text/javascript">
+		if (document.createElement("template").content) {
+			alert('oke')
+			/*Code for browsers that supports the TEMPLATE element*/
+		} else {
+			alert('Your browser don\'t supported templates. \nSorry bro.')
+		}
+	</script>
+
+  <script type="text/javascript">
+
+		$(document).ready(function() {
+			// $(window).load(function() {
+			// $(window).on('load', function() {
+				// custom unit
+				const popugaev = 'bazat'.length
+				const animationTimeout = 1000*popugaev
+				const loadTimeout = 200*popugaev
+				
+				async function gotoFooter() {
+					// console.log($(document).height() - $(window).height())
+					// console.log($(window).height())
+					// console.log($(document).scrollTop())
+					await $('html, body').animate({
+						scrollTop: $(document).height() - $(window).height() + /*kostyl*/ 20
+					}, animationTimeout)
+					return false
+				}
+
+				var listElm = document.querySelector('#infinite-list')
+				// get the template element:
+				var postTpl = document.getElementsByTagName("template")[0]
+				// get the DIV element from the template:
+				postTpl = postTpl.content.querySelector("div.card")
+
+				// Add 10 items.
+				const itemCount = 10
+				var nextItem = 1
+				var loadMore = async function() {
+					// for (var i = 0; i < itemCount; i++) {
+					// 	$("#infinite-list > div").first().remove()
+					// }
+					// console.log( $(document).height() - $(window).height() )
+					for (var i = 0; i < itemCount; i++) {
+						// Create a new node, based on the template:
+						var postInst = document.importNode(postTpl, true)
+						// // Add data from the array:
+						// a.textContent += myArr[i];
+						// var item = document.createElement('div')
+						// item.innerText = 'Item ' + nextItem++
+						listElm.appendChild(postInst)
+					}
+					gotoFooter()
+				}
+
+				// Detect when scrolled to bottom.
+				$(document).scroll(function() {
+					// console.log($(document).scrollTop())
+					// console.log($(window).height())
+					// console.log($(document).height())
+					// с жейквэри 1.9.1 поприличней стакает логи
+					// console.log($(document).scrollTop() + $(window).height() >= $(document).height())
+					if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+						setTimeout(function() { 
+							// и прелоадер
+							// delMore()
+							loadMore()
+						}, loadTimeout);
+					}
+				});
+
+				// Initially load some items.
+				loadMore()
+
+			// });
+		});
+
+	</script>
+
+<link href="styles.css" rel="stylesheet"></head><span id="warning-container"><i data-reactroot=""></i></span>
+<body>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="white-box block-tab sticky">
+						<div id="advertising-list" class="white-box-content">
+							<!-- zadel pod future -->
+						</div>
+					</div>
+
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+					<div class="white-box block-tab">
+						<div id="infinite-list" class="white-box-content">
+							<!-- kazhetsya, #111848 - last elem -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- invisible -->
+		<template>
+			<div class="card gedf-card">
+				<div class="card-header">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="mr-2">
+								<img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+							</div>
+							<div class="ml-2">
+								<div class="h5 m-0">@LeeCross</div>
+								<div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div>
+							</div>
+						</div>
+						<div>
+							<div class="dropdown">
+								<button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-ellipsis-h"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<a class="card-link" href="#">
+						<h5 class="card-title"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit consectetur
+								deserunt illo esse distinctio.</h5>
+					</a>
+	
+					<p class="card-text">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam omnis nihil, aliquam est, voluptates officiis iure soluta
+						alias vel odit, placeat reiciendis ut libero! Quas aliquid natus cumque quae repellendus. Lorem
+						ipsum dolor sit amet consectetur adipisicing elit. Ipsa, excepturi. Doloremque, reprehenderit!
+						Quos in maiores, soluta doloremque molestiae reiciendis libero expedita assumenda fuga quae.
+						Consectetur id molestias itaque facere? Hic!
+					</p>
+					<div>
+						<span class="badge badge-primary">JavaScript</span>
+						<span class="badge badge-primary">Android</span>
+						<span class="badge badge-primary">PHP</span>
+						<span class="badge badge-primary">Node.js</span>
+						<span class="badge badge-primary">Ruby</span>
+						<span class="badge badge-primary">Paython</span>
+					</div>
+				</div>
+				<div class="card-footer">
+					<a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+					<a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+					<a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+				</div>
+			</div>
+		</template>
+		<!--  -->
+		<template>
+			<div class="card-body">
+				<p class="card-text">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam omnis nihil, aliquam est, voluptates officiis iure soluta
+					alias vel odit, placeat reiciendis ut libero! Quas aliquid natus cumque quae repellendus. Lorem
+					ipsum dolor sit amet consectetur adipisicing elit. Ipsa, excepturi. Doloremque, reprehenderit!
+					Quos in maiores, soluta doloremque molestiae reiciendis libero expedita assumenda fuga quae.
+					Consectetur id molestias itaque facere? Hic!
+				</p>
+			</div>
+		</template>
+
+	</body>
+</html>
